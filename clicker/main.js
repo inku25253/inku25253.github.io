@@ -55,7 +55,9 @@ function ui_hello() {
       ui_triming(event.target.result);
     });
   });
-
+  wnd.append($("<span></span>").text("首を伸ばしたいモンスターとか画像を選択してね！"));
+  wnd.append($("<br />"));
+  wnd.append($("<br />"));
   wnd.append(opendialog_button);
 
   wnd.show();
@@ -63,7 +65,7 @@ function ui_hello() {
 }
 
 function ui_triming(image_src) {
-  var wnd = new_window("Triming");
+  var wnd = new_window("Trimming");
   wnd.height("80%");
   var center_div = $("<div></div>").css({ "text-align": "center" });
   var canvas = $("<canvas></canvas>").addClass("ui_trim_canvas");
@@ -208,7 +210,9 @@ function ui_triming(image_src) {
 
 
 
-
+  wnd.append($("<span></span>").text("線を移動して首の場所を決めてください！"));
+  wnd.append($("<br />"));
+  wnd.append($("<br />"));
   wnd.append(center_div);
   wnd.append(ok_button);
   wnd.show();
