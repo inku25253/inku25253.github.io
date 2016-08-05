@@ -170,28 +170,30 @@ function ui_triming(image_src) {
 
 
 
-      function show_img(blob, target, _height) {
-        var url = URL.createObjectURL(blob);
-        var image = new Image();
-        image.src = url;
-        image.onload = function () {
-          target.css({
-            "background-image": "url('" + url + "')",
-            width: img.width,
-            height: _height
-          });
+      function show_img(_canvas, target, _height) {
+        function toBlob(fn) {
+          if (_canvas.toBlob) _canvas.toBlob(fn); else
+            if (_canvas.msToBlob) fn(_canvas.msToBlob());
         }
+        toBlob(
+          function (blob) {
+            var url = URL.createObjectURL(blob);
+            var image = new Image();
+            image.src = url;
+            image.onload = function () {
+              target.css({
+                "background-image": "url('" + url + "')",
+                width: img.width,
+                height: _height
+              });
+            }
+          }
+        );
       }
 
-      head[0].toBlob(function (blob) {
-        show_img(blob, monster_head_div, head_height);
-      });
-      neck[0].toBlob(function (blob) {
-        show_img(blob, monster_neck_div, 0);
-      });
-      body[0].toBlob(function (blob) {
-        show_img(blob, monster_body_div, body_height);
-      });
+      show_img(head[0], monster_head_div, head_height);
+      show_img(neck[0], monster_neck_div, 0);
+      show_img(body[0], monster_body_div, body_height);
 
       wnd.close();
 
